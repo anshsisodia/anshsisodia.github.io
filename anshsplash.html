@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansh Sisodia | Graphic Designer, Author & Storyteller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+        :root {
+            --primary: #121212;
+            --secondary: #1a1a1a;
+            --accent: #d4af37;
+            --flipkart: #2874f0;
+            --text-light: #f4f4f4;
+            --text-muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Fluid Canvas Styling */
+        #fluid-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-glass {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(26, 26, 26, 0.5);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-link.accent { color: var(--accent); }
+        .btn-link.flipkart { color: var(--flipkart); }
+        
+        .btn-link:hover {
+            color: white;
+            transform: translateX(3px);
+        }
+
+        .skill-tag {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .social-icon-circle {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-icon-circle:hover {
+            background: var(--accent);
+            color: black !important;
+            transform: translateY(-5px) scale(1.1);
+            border-color: var(--accent);
+        }
+
+        section {
+            padding: 80px 20px;
+        }
+
+        /* Discover Swipe Animation */
+        @keyframes swipeDown {
+            0% { transform: translateY(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
+        }
+        .swipe-arrow {
+            animation: swipeDown 2s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fluid Background Canvas -->
+    <canvas id="fluid-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-glass">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold tracking-tighter uppercase">
+                Ansh <span class="text-[#d4af37]">Sisodia</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm uppercase tracking-widest font-semibold">
+                <a href="#home" class="hover:text-[#d4af37] transition">Home</a>
+                <a href="#about" class="hover:text-[#d4af37] transition">About</a>
+                <a href="#achievements" class="hover:text-[#d4af37] transition">Achievements</a>
+                <a href="#cinema" class="hover:text-[#d4af37] transition">Cinema</a>
+                <a href="#literary" class="hover:text-[#d4af37] transition">Literary</a>
+                <a href="#contact" class="hover:text-[#d4af37] transition">Contact</a>
+            </div>
+            <button class="md:hidden text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden bg-black w-full p-6 flex flex-col space-y-4 text-center">
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#about" onclick="toggleMenu()">About</a>
+            <a href="#achievements" onclick="toggleMenu()">Achievements</a>
+            <a href="#cinema" onclick="toggleMenu()">Cinema</a>
+            <a href="#literary" onclick="toggleMenu()">Literary</a>
+            <a href="#contact" onclick="toggleMenu()">Contact</a>
+            <div class="flex justify-center space-x-4 pt-4 border-t border-white/10">
+                <a href="https://www.instagram.com/storywala.ansh/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/the.anshsisodiafb" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/in/theanshsisodia/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex flex-col items-center justify-center text-center relative overflow-hidden">
+        <div class="z-10 max-w-4xl px-4 flex-grow flex flex-col items-center justify-center">
+            <p class="text-[#d4af37] uppercase tracking-[0.3em] mb-4 text-sm font-semibold">Graphic Designer • Author • Storyteller</p>
+            <h1 class="text-5xl md:text-8xl font-bold mb-2 tracking-tight">Ansh Sisodia</h1>
+            <p class="text-lg md:text-xl uppercase tracking-[0.2em] text-gray-400 mb-8 font-light serif">Rana Anshuman Singh</p>
+            <p class="text-xl md:text-2xl italic text-gray-400 mb-8 font-light">"Exploring themes of love, identity, and social commentary through versatile storytelling."</p>
+        </div>
+
+        <!-- Discover Swipe Indicator -->
+        <a href="#about" class="z-10 mb-10 flex flex-col items-center group">
+            <span class="text-xs uppercase tracking-[0.4em] text-gray-400 group-hover:text-[#d4af37] transition-colors mb-4">Discover</span>
+            <div class="swipe-arrow text-[#d4af37] text-xl">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-4xl font-bold mb-6">The Journey <span class="text-[#d4af37] font-light">of Rana Anshuman Singh</span></h2>
+                <div class="text-gray-300 leading-relaxed mb-6 space-y-4">
+                    <p>
+                        Born in Varanasi, the spiritual heart of India, Rana Anshuman Singh, known creatively as Ansh Sisodia, is a storyteller working across cinema, poetry and digital media. He began filmmaking at 18 and gained national recognition for his award-winning short film Soch-Aalay. With a bachelor’s and a master’s degree in Mass Communication from Mahatma Gandhi Kashi Vidyapith University, he blends academic rigor with instinctive artistic expression.
+                    </p>
+                    <p>
+                        A passionate content creator and digital media professional, Ansh specialises in creative writing, social media strategy, SEO, graphic design and voice narration. His experience spans roles at Unified Bharat, Enrich IAS and MGKVP, where he led content, campaigns and media coordination. Writing in Hindi and Urdu across poetry and narrative forms, he crafts emotionally resonant stories that engage, inspire and drive meaningful impact.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-white/5 rounded">
+                        <h4 class="text-[#d4af37] text-2xl font-bold">8+</h4>
+                        <p class="text-xs uppercase tracking-tighter text-gray-400">Years of Storytelling</p>
+                    </div>
+                    <div class="p-4 bg-white/5 rounded">
+                        <h4 class="text-[#d4af37] text-2xl font-bold">2019</h4>
+                        <p class="text-xs uppercase tracking-tighter text-gray-400">DSPIFF Recognition</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6">
+                <div class="p-8 bg-[#1a1a1a]/80 rounded-lg border-l-4 border-white/20 backdrop-blur-sm">
+                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-graduation-cap mr-3 text-[#d4af37]"></i> Education</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-sm font-bold">MA - Mass Communication</p>
+                            <p class="text-xs text-gray-400">Mahatma Gandhi Kashi Vidyapith (2023-2025)</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold">BA - Mass Communication</p>
+                            <p class="text-xs text-gray-400">Mahatma Gandhi Kashi Vidyapith (2020-2023)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 bg-[#1a1a1a]/80 rounded-lg border-l-4 border-[#d4af37] backdrop-blur-sm">
+                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-star mr-3 text-[#d4af37]"></i> Core Expertise</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full skill-tag text-xs font-bold uppercase">Public Relations</span>
+                        <span class="px-3 py-1 rounded-full skill-tag text-xs font-bold uppercase">Scriptwriting</span>
+                        <span class="px-3 py-1 rounded-full skill-tag text-xs font-bold uppercase">Graphic Design</span>
+                        <span class="px-3 py-1 rounded-full skill-tag text-xs font-bold uppercase">Digital Branding</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Academic & Field <span class="text-[#d4af37]">Achievements</span></h2>
+            
+            <div class="space-y-8">
+                <!-- Achievement 1 -->
+                <div class="p-8 rounded-2xl border border-white/5 card-hover backdrop-blur-md">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold">Content Editor – Web & Social Media</h3>
+                            <p class="text-[#d4af37] font-semibold text-lg">Unified Bharat</p>
+                        </div>
+                        <span class="text-gray-500 font-bold uppercase text-xs tracking-widest mt-2 md:mt-0">2025</span>
+                    </div>
+                    <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                        <p>Managed the end-to-end content flow across the organisation’s news website and social media platforms. Role involved editing and curating articles, features and opinion pieces, while also overseeing website management and SEO strategy to improve reach and visibility.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Led digital campaigns and crafted engaging posts to ensure accuracy and audience impact.</li>
+                            <li>Handled press releases and media outreach, strengthening the brand’s footprint.</li>
+                            <li>Combined creative storytelling with data-driven strategy to grow online readership.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Achievement 2 -->
+                <div class="p-8 rounded-2xl border border-white/5 card-hover backdrop-blur-md">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold">Student Club Head</h3>
+                            <p class="text-[#d4af37] font-semibold text-lg">Mahatma Gandhi Kashi Vidyapith University</p>
+                        </div>
+                        <span class="text-gray-500 font-bold uppercase text-xs tracking-widest mt-2 md:mt-0">2022 - 2025</span>
+                    </div>
+                    <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                        <p>Awarded Letter of Appreciation by Vice Chancellor for 3 terms. Spearheaded the planning and execution of student-centred programmes and activities, fostering campus engagement and inclusivity through the <strong>Activity Club</strong>.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Managed a team of 224 members, delegating responsibilities and ensuring effective coordination.</li>
+                            <li>Organised cultural festivals, seminars, workshops and community service projects.</li>
+                            <li>Collaborated with university administration and external organisations to secure sponsorships.</li>
+                            <li>Designed and implemented promotional strategies, including social media and on-campus campaigns.</li>
+                            <li>Represented the student community in university meetings, ensuring their voices were heard.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Achievement 3 -->
+                <div class="p-8 rounded-2xl border border-white/5 card-hover backdrop-blur-md">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold">Social Media Content Manager & Graphic Designer</h3>
+                            <p class="text-[#d4af37] font-semibold text-lg">Enrich IAS</p>
+                        </div>
+                        <span class="text-gray-500 font-bold uppercase text-xs tracking-widest mt-2 md:mt-0">2024</span>
+                    </div>
+                    <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                        <p>Managed content calendars and created impactful graphics for multiple social media platforms. Focused on boosting audience engagement and strengthening brand presence.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Supported the institute’s overall branding and PR initiatives through creative storytelling.</li>
+                            <li>Created visually appealing designs to support education outreach.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Achievement 4 -->
+                <div class="p-8 rounded-2xl border border-white/5 card-hover backdrop-blur-md">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold">Public Relations Trainee</h3>
+                            <p class="text-[#d4af37] font-semibold text-lg">Mahatma Gandhi Kashi Vidyapith University</p>
+                        </div>
+                        <span class="text-gray-500 font-bold uppercase text-xs tracking-widest mt-2 md:mt-0">2022 - 2024</span>
+                    </div>
+                    <div class="text-gray-300 text-sm leading-relaxed space-y-2">
+                        <p>Supported the Public Relations Office in managing the university’s public image and communications strategies. Received Letter of Trainee by University PRO for 2 Years.</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Designed engaging graphics, posters and promotional materials using tools like Canva and Adobe Photoshop.</li>
+                            <li>Managed official social media accounts, including content creation, scheduling and monitoring engagement.</li>
+                            <li>Assisted in drafting press releases, newsletters and email communications.</li>
+                            <li>Coordinated with media outlets for the coverage of university events.</li>
+                            <li>Monitored and analysed social media metrics to assess PR strategy impact.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cinema Section -->
+    <section id="cinema">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Cinematic <span class="text-[#d4af37]">Portfolio</span></h2>
+                <div class="w-20 h-1 bg-[#d4af37] mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover p-8 rounded-xl flex flex-col h-full backdrop-blur-md">
+                    <div class="text-[#d4af37] mb-4"><i class="fas fa-award fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Soch-Aalay (2019)</h3>
+                    <p class="text-sm text-gray-400 mb-6 flex-grow">Award-winning short film nominated for the Dada Saheb Phalke International Film Festival.</p>
+                    <a href="https://youtu.be/CAsBw92bWv0?si=veFOF5VqLivYqq0s" target="_blank" class="btn-link accent">
+                        <i class="fab fa-youtube text-lg"></i> Watch Now
+                    </a>
+                </div>
+                <div class="card-hover p-8 rounded-xl flex flex-col h-full backdrop-blur-md">
+                    <div class="text-gray-500 mb-4"><i class="fas fa-film fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Buchiyaa (2020)</h3>
+                    <p class="text-sm text-gray-400 mb-6 flex-grow">A profound exploration of social narratives through the lens of independent cinema.</p>
+                    <a href="https://youtu.be/T7Xom4wNp9M?si=k9_w5V7KtsV9f-Se" target="_blank" class="btn-link accent">
+                        <i class="fab fa-youtube text-lg"></i> Watch Now
+                    </a>
+                </div>
+                <div class="card-hover p-8 rounded-xl flex flex-col h-full backdrop-blur-md">
+                    <div class="text-gray-500 mb-4"><i class="fas fa-clapperboard fa-2x"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Murkh-Daan (2020)</h3>
+                    <p class="text-sm text-gray-400 mb-6 flex-grow">Experimental short film focusing on political commentary and human behavior.</p>
+                    <a href="https://www.youtube.com/shorts/rS3W-Fd_vNA" target="_blank" class="btn-link accent">
+                        <i class="fab fa-youtube text-lg"></i> Watch Short
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Literary Section -->
+    <section id="literary" class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-pen-nib mr-4 text-[#d4af37]"></i> Literary Works
+                </h2>
+                <div class="space-y-8">
+                    <div class="flex gap-6 p-4 rounded-lg hover:bg-white/5 transition backdrop-blur-sm">
+                        <div class="flex-shrink-0 w-16 h-20 bg-white/10 rounded flex items-center justify-center italic text-[#d4af37] font-bold text-xl border border-[#d4af37]/30 shadow-lg shadow-[#d4af37]/10">AK</div>
+                        <div class="flex flex-col justify-center">
+                            <h4 class="font-bold text-lg">Ansh Ke Alfaaz (2020)</h4>
+                            <p class="text-sm text-gray-400 mb-3">A debut poetry collection exploring raw human emotions.</p>
+                            <div class="flex gap-4">
+                                <a href="https://amzn.in/d/bpSylA8" target="_blank" class="btn-link accent">
+                                    <i class="fab fa-amazon"></i> Amazon
+                                </a>
+                                <a href="https://www.flipkart.com/hi/ansh-ke-alfaaz-2020/p/itmdad85c1103db0" target="_blank" class="btn-link flipkart">
+                                    <i class="fas fa-shopping-cart"></i> Flipkart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 p-4 rounded-lg hover:bg-white/5 transition backdrop-blur-sm">
+                        <div class="flex-shrink-0 w-16 h-20 bg-white/10 rounded flex items-center justify-center italic text-[#d4af37] font-bold text-xl border border-[#d4af37]/30 shadow-lg shadow-[#d4af37]/10">IK</div>
+                        <div class="flex flex-col justify-center">
+                            <h4 class="font-bold text-lg">Ishq Ke Ansh (2021)</h4>
+                            <p class="text-sm text-gray-400 mb-3">A collection centered on contemporary romance.</p>
+                            <div class="flex gap-4">
+                                <a href="https://amzn.in/d/bEcLovx" target="_blank" class="btn-link accent">
+                                    <i class="fab fa-amazon"></i> Amazon
+                                </a>
+                                <a href="https://www.flipkart.com/ishq-ke-ansh/p/itmfd2c1a602f070" target="_blank" class="btn-link flipkart">
+                                    <i class="fas fa-shopping-cart"></i> Flipkart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold mb-8 flex items-center">
+                    <i class="fas fa-microphone-lines mr-4 text-[#d4af37]"></i> Podcasts
+                </h2>
+                <div class="p-8 rounded-2xl border border-white/10 relative overflow-hidden group backdrop-blur-md bg-white/5">
+                    <div class="absolute -right-4 -top-4 text-white/5 text-9xl group-hover:text-[#d4af37]/10 transition-colors">
+                        <i class="fas fa-podcast"></i>
+                    </div>
+                    <p class="text-xs text-[#d4af37] mb-2 uppercase tracking-widest font-bold">India Book of Records Documented</p>
+                    <h3 class="text-2xl font-bold mb-2 italic">Ankahi Dastaan with Ansh</h3>
+                    <p class="text-sm text-gray-300 mb-8 leading-relaxed">
+                        A storytelling platform focusing on spoken verse and unheard narratives.
+                    </p>
+                    <div class="grid grid-cols-2 gap-y-4 gap-x-6">
+                        <a href="https://open.spotify.com/show/2P5QAuOnnxcLsfpmeUhtKJ" target="_blank" class="btn-link accent">
+                            <i class="fab fa-spotify text-lg"></i> Spotify
+                        </a>
+                        <a href="https://podcasts.apple.com/us/podcast/malaal-audio-story-ansh-sisodia/id1515746885?i=1000509691073" target="_blank" class="btn-link accent">
+                            <i class="fab fa-apple text-lg"></i> Apple
+                        </a>
+                        <a href="https://www.jiosaavn.com/shows/ankahi-dastaan-with-ansh/1/2MozynEnnFQ_" target="_blank" class="btn-link accent">
+                            <i class="fas fa-music text-lg"></i> JioSaavn
+                        </a>
+                        <a href="https://music.amazon.in/podcasts/c049c1c4-06c2-44d7-8fff-5f52545821ad/ankahi-dastaan-with-ansh" target="_blank" class="btn-link accent">
+                            <i class="fab fa-amazon text-lg"></i> Amazon
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-4xl mx-auto px-6 mb-20">
+        <div class="bg-white/95 text-black p-12 rounded-3xl text-center shadow-2xl shadow-[#d4af37]/10 backdrop-blur-md">
+            <h2 class="text-4xl font-bold mb-4">Let's Collaborate</h2>
+            <p class="mb-10 text-gray-600">Available for filmmaking, PR consultations, and creative collaborations.</p>
+            <div class="grid md:grid-cols-2 gap-8 text-left max-w-2xl mx-auto border-t border-gray-100 pt-8">
+                <div>
+                    <p class="text-xs uppercase font-bold text-gray-400 mb-1">Email</p>
+                    <a href="mailto:anshsisodia999@gmail.com" class="text-lg font-bold hover:text-[#d4af37] transition">anshsisodia999@gmail.com</a>
+                </div>
+                <div>
+                    <p class="text-xs uppercase font-bold text-gray-400 mb-1">Location</p>
+                    <p class="text-lg font-bold">Varanasi, India</p>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-100">
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.facebook.com/the.anshsisodiafb" target="_blank" class="social-icon-circle text-gray-600">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/storywala.ansh/" target="_blank" class="social-icon-circle text-gray-600">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/theanshsisodia/" target="_blank" class="social-icon-circle text-gray-600">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 text-center border-t border-white/10 bg-black/80 backdrop-blur-sm">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-2xl font-bold tracking-tighter uppercase mb-6">
+                Ansh <span class="text-[#d4af37]">Sisodia</span>
+            </div>
+            <p class="text-gray-500 text-xs uppercase tracking-widest">
+                © <script>document.write(new Date().getFullYear())</script> Ansh Sisodia.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- FLUID SIMULATION LOGIC ---
+        const canvas = document.getElementById('fluid-canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+        if (gl) {
+            let width, height;
+            const simRes = 128; // Simulation Resolution for Velocity Fields
+            const dyeRes = 512; // Dye Resolution
+            const colorGold = { r: 0.83, g: 0.68, b: 0.21 }; // Matches #d4af37
+
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                gl.viewport(0, 0, width, height);
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            // Simple Shaders for Splash Fluid
+            const baseVertex = `
+                precision highp float;
+                attribute vec2 position;
+                varying vec2 vUv;
+                void main() {
+                    vUv = position * 0.5 + 0.5;
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+
+            const splashFragment = `
+                precision highp float;
+                varying vec2 vUv;
+                uniform vec2 uMouse;
+                uniform vec3 uColor;
+                uniform float uRadius;
+                uniform float uAspect;
+                void main() {
+                    vec2 diff = vUv - uMouse;
+                    diff.x *= uAspect;
+                    float dist = length(diff);
+                    float strength = exp(-dist / uRadius);
+                    gl_FragColor = vec4(uColor * strength, strength);
+                }
+            `;
+
+            function createShader(type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const program = gl.createProgram();
+            gl.attachShader(program, createShader(gl.VERTEX_SHADER, baseVertex));
+            gl.attachShader(program, createShader(gl.FRAGMENT_SHADER, splashFragment));
+            gl.linkProgram(program);
+
+            const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+            const buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+            const positionLoc = gl.getAttribLocation(program, 'position');
+            gl.enableVertexAttribArray(positionLoc);
+            gl.vertexAttribPointer(positionLoc, 2, gl.FLOAT, false, 0, 0);
+
+            const uMouse = gl.getUniformLocation(program, 'uMouse');
+            const uColor = gl.getUniformLocation(program, 'uColor');
+            const uRadius = gl.getUniformLocation(program, 'uRadius');
+            const uAspect = gl.getUniformLocation(program, 'uAspect');
+
+            let mouseX = 0.5, mouseY = 0.5;
+            let targetX = 0.5, targetY = 0.5;
+
+            window.addEventListener('mousemove', e => {
+                targetX = e.clientX / window.innerWidth;
+                targetY = 1.0 - (e.clientY / window.innerHeight);
+            });
+
+            function render() {
+                // Smooth follow for cursor
+                mouseX += (targetX - mouseX) * 0.1;
+                mouseY += (targetY - mouseY) * 0.1;
+
+                gl.clearColor(0, 0, 0, 0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+
+                gl.useProgram(program);
+                gl.uniform2f(uMouse, mouseX, mouseY);
+                gl.uniform3f(uColor, colorGold.r, colorGold.g, colorGold.b);
+                gl.uniform1f(uRadius, 0.15);
+                gl.uniform1f(uAspect, width / height);
+
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                requestAnimationFrame(render);
+            }
+
+            render();
+        }
+    </script>
+</body>
+</html>
